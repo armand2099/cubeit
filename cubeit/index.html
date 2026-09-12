@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Cuber</title>
+    <!-- Importing Segoe UI-like clean sans-serif font style -->
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+            background-color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333333;
+        }
+
+        .container {
+            text-align: center;
+            width: 100%;
+            max-width: 450px;
+            padding: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        input[type="number"] {
+            width: 240px;
+            height: 42px;
+            padding: 0 14px;
+            font-size: 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            outline: none;
+            color: #333333;
+            transition: border-color 0.2s;
+        }
+
+        input[type="number"]::placeholder {
+            color: #a0a0a0;
+        }
+
+        input[type="number"]:focus {
+            border-color: #2b6cb0;
+        }
+
+        /* Remove arrows from number input */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+
+        button {
+            height: 42px;
+            padding: 0 24px;
+            font-size: 16px;
+            background-color: #2b6cb0;
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: #23578c;
+        }
+
+        .result-container {
+            font-size: 16px;
+            color: #555555;
+            min-height: 50px;
+        }
+
+        .calculated-result {
+            font-size: 36px;
+            font-weight: 400;
+            color: #222222;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="input-group">
+            <input type="number" id="numberInput" placeholder="enter number..." />
+            <button onclick="calculateCube()">Cube</button>
+        </div>
+        <div class="result-container" id="resultDisplay">
+            Your result will appear here...
+        </div>
+    </div>
+
+    <script>
+        function calculateCube() {
+            const input = document.getElementById('numberInput');
+            const resultDisplay = document.getElementById('resultDisplay');
+            const val = input.value;
+
+            if (val === '') {
+                resultDisplay.innerHTML = 'Enter something!';
+                return;
+            }
+
+            const num = parseFloat(val);
+            const cube = Math.pow(num, 3);
+
+            // Renders format exactly like the second state: X³ = Y
+            resultDisplay.innerHTML = `<div class="calculated-result">${num}<sup>3</sup> = ${cube}</div>`;
+        }
+
+        // Allow pressing "Enter" key to trigger the calculation
+        document.getElementById('numberInput').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                calculateCube();
+            }
+        });
+    </script>
+
+</body>
+</html>
